@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Home page</h1>
+    <a href="{% url 'add-book' %}">Book qoshish pagega otish</a>
+
+    <h2>Books ro'yhati</h2>
+
+    {% for book in books %}
+        <p>{{book.title}} | {{book.author}} | {{book.year}} | {{book.genre}}</p>
+    {% endfor %}
+        
+</body>
+</html>
