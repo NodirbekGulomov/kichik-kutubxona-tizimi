@@ -1,16 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Yangi kitob qo'shish — Kichik Kutubxona Tizimi">
+    <title>Kutubxona — Kitob qo'shish</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    Book qo'shish <a href="{% url 'home' %}">Ortga</a>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Submit</button>
-    </form>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <span class="brand-icon">📚</span>
+                Kutubxona
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a></li>
+                <li><a href="{% url 'add-book' %}" class="nav-link active">Kitob qo'shish</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <div class="form-card">
+            <div class="form-header">
+                <div class="form-icon">✏️</div>
+                <h2>Yangi kitob qo'shish</h2>
+                <p>Kitob ma'lumotlarini to'ldiring</p>
+            </div>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-actions">
+                    <a href="{% url 'home' %}" class="btn btn-ghost">← Ortga</a>
+                    <button type="submit" class="btn btn-success">💾 Saqlash</button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Kichik Kutubxona Tizimi</p>
+    </footer>
+
+    <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>

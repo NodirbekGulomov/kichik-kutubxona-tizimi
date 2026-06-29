@@ -1,19 +1,107 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Kichik Kutubxona Tizimi — Kitoblaringizni boshqaring">
+    <title>Kutubxona — Bosh sahifa</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Home page</h1>
-    <a href="{% url 'add-book' %}">Book qoshish pagega otish</a>
 
-    <h2>Books ro'yhati</h2>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <span class="brand-icon">📚</span>
+                Kutubxona
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="{% url 'home' %}" class="nav-link active">Bosh sahifa</a></li>
+                <li><a href="{% url 'add-book' %}" class="btn btn-primary">+ Kitob qo'shish</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    {% for book in books %}
-        <p>{{book.title}} | {{book.author}} | {{book.year}} | {{book.genre}}</p>
-    {% endfor %}
-        
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>📖 Kitoblar Kutubxonasi</h1>
+            <p class="subtitle">Barcha kitoblaringiz bir joyda — qulay va tartibli</p>
+            {% if books %}
+            <div class="stats-badge">
+                <span class="dot"></span>
+                <span id="books-count">{{ books|length }} ta kitob</span>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if books %}
+        <!-- Search -->
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Kitob, muallif yoki janr izlash... (Ctrl+K)">
+            <button type="button" id="search-clear" class="search-clear">✕</button>
+        </div>
+
+        <!-- Books Grid -->
+        <div class="books-grid" id="books-grid">
+            {% for book in books %}
+            <div class="book-card"
+                 data-title="{{ book.title }}"
+                 data-author="{{ book.author }}"
+                 data-genre="{{ book.genre }}"
+                 data-year="{{ book.year }}">
+                <div class="card-header">
+                    <div class="book-icon">📕</div>
+                    <span class="book-number">#{{ forloop.counter }}</span>
+                </div>
+                <h3 class="book-title">{{ book.title }}</h3>
+                <div class="book-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Muallif</span>
+                        <span class="detail-value">{{ book.author }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Yil</span>
+                        <span class="detail-value">{{ book.year }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Janr</span>
+                        <span class="genre-tag">{{ book.genre }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- No Results (hidden by default) -->
+        <div class="no-results" id="no-results">
+            <div class="no-results-icon">🔎</div>
+            <h4>Hech narsa topilmadi</h4>
+            <p>Boshqa so'z bilan izlab ko'ring</p>
+        </div>
+
+        {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-icon">📚</div>
+            <h3>Hali kitob qo'shilmagan</h3>
+            <p>Birinchi kitobingizni qo'shib boshlang!</p>
+            <a href="{% url 'add-book' %}" class="btn btn-primary">+ Kitob qo'shish</a>
+        </div>
+        {% endif %}
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Kichik Kutubxona Tizimi</p>
+    </footer>
+
+    <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>

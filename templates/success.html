@@ -1,12 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Kitob muvaffaqiyatli qo'shildi — Kichik Kutubxona Tizimi">
+    <title>Kutubxona — Muvaffaqiyat!</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h3>Book muvaffaqiyatli qoshildi!</h3>
-    <a href="{% url 'home' %}">Bosh sahifaga</a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <span class="brand-icon">📚</span>
+                Kutubxona
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a></li>
+                <li><a href="{% url 'add-book' %}" class="nav-link">Kitob qo'shish</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <div class="success-card">
+            <div class="success-icon-wrapper">
+                <span class="checkmark">✅</span>
+            </div>
+            <h3>Kitob muvaffaqiyatli qo'shildi!</h3>
+            <p>Yangi kitob kutubxonangizga saqlandi</p>
+            <div class="btn-group">
+                <a href="{% url 'home' %}" class="btn btn-primary">📚 Bosh sahifaga</a>
+                <a href="{% url 'add-book' %}" class="btn btn-ghost">+ Yana qo'shish</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Kichik Kutubxona Tizimi</p>
+    </footer>
+
+    <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>
